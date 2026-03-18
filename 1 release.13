@@ -1,0 +1,81 @@
+cd ~/termux-tyg
+
+mkdir -p release-1.13
+cp $PREFIX/bin/bitcoind release-1.13/
+cp $PREFIX/bin/bitcoin-cli release-1.13/
+cp $PREFIX/bin/bitcoin-tx release-1.13/
+
+# If you have rclone configs or scripts:
+cp ~/scripts/rclone-* release-1.13/ 2>/dev/null || true
+cp $PREFIX/bin/rclone release-1.13/
+tar -czvf release-1.13.tar.gz release-1.13
+git add release-1.13.tar.gz
+git commit -m "Release 1.13: Bitcoin Core 27.0 static + rclone tools"
+git tag -a v1.13 -m "Release 1.13"
+git push
+git push --tags
+gh release create v1.13 release-1.13.tar.gz \
+  --title "Release 1.13" \
+  --notes "Includes Bitcoin Core 27.0 static ARM64 build and rclone utilities
+  ---
+
+# 📄 LICENSE (MIT License Template)
+
+```markdown
+MIT License
+
+Copyright (c) 2026
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction...
+# Changelog
+
+## v1.0.0 — Initial Release
+- Added Termux build script for Bitcoin Core
+- Added raw transaction template generator
+- Added broadcast helper
+- Added UTXO analysis tool
+- Added documentation folder"
+# Contributing Guidelines
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit using clear messages
+4. Submit a pull request
+
+Please follow existing code style and include documentation updates when needed.
+# Bitcoin Tools & Scripts
+
+A collection of Bitcoin‑related utilities, Termux‑compatible build scripts, and workflow tools designed for Android environments.  
+This repository includes:
+
+- Build scripts for Bitcoin Core (Termux‑optimized)
+- Raw transaction construction helpers
+- UTXO analysis tools
+- Automation utilities for Android/Termux
+- GitHub‑ready release structure
+
+---
+
+## 🚀 Features
+
+### ✔ Termux‑Optimized Build Scripts
+- Compile Bitcoin Core v27.0+ on Android 16
+- Fully static builds with wallet disabled
+- Automatic dependency checks
+
+### ✔ Transaction & UTXO Tools
+- Raw transaction templates
+- Hex assembly helpers
+- Fee estimation utilities
+- Broadcast helpers using `curl`
+
+### ✔ Blockchain Analysis
+- TSV/CSV parsing for Blockchair datasets
+- UTXO fan‑out tracing
+- Block template inspection
+
+---
+
+## 📂 Repository Structure
